@@ -2,6 +2,7 @@ const express=require('express');
 require('dotenv').config();
 const bookRouter=require('./src/routes/bookRouter');
 const issueBookRouter=require('./src/routes/issueBookRouter');
+const User=require('./src/models/User');
 const db=require('./src/config/db');
 
 const app=express();

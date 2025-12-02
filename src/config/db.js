@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-mongoose.connect('mongodb+srv://grandtable68_db_user:elevatecoders@cluster0.udvgvoe.mongodb.net/?appName=Cluster0');
+mongoose.connect('mongodb://localhost:27017/letsupgrade');
 
 const db=mongoose.connection;
 
