@@ -1,15 +1,15 @@
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/letsupgrade');
 
-const db=mongoose.connection;
+const db = mongoose.connection;
 
-db.on('connected',()=>{
-    console.log('Database connected successfully...');
+db.on('connected', () => {
+  console.log('Database connected successfully...');
 });
 
-db.on('error',()=>{
-    console.log('Database connection failed...');
+db.on('error', () => {
+  console.log('Database connection failed...');
 });
 
-module.exports=db;
+module.exports = db;
