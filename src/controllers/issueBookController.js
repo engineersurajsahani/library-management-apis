@@ -5,6 +5,11 @@ const User = require('../models/User');
 
 issueBook=async (request,response)=>{
     try {
+
+        if(request.user.role==='STUDENT'){
+            return response.status(403).json({message:"You are not authorized to issue a book"});
+        }
+
         const {bookId,bookName,studentId,studentName,issueDate,returnDate}=request.body;
 
         const book=await Book.findById(bookId);
@@ -47,6 +52,11 @@ issueBook=async (request,response)=>{
 
 returnBook=async (request,response)=>{
     try {
+
+        if(request.user.role==='STUDENT'){
+            return response.status(403).json({message:"You are not authorized to return a book"});
+        }
+
         const issueBook=await IssueBook.findById(request.params.id);
 
         if(!issueBook){

@@ -1,5 +1,4 @@
 const Book=require('../models/Book');
-
 const books=[];
 
 getAllBooks=async (request,response)=>{
@@ -25,6 +24,11 @@ getBookById=async (request,response)=>{
 
 createBook=async (request,response)=>{
     try {
+
+        if(request.user.role==='STUDENT'){
+            return response.status(403).json({message:"You are not authorized to create a book"});
+        }
+
         const {title,author,publishedYear,price,quantity}=request.body;
 
         if(!title || !author || !publishedYear || !price || !quantity){
@@ -52,6 +56,11 @@ createBook=async (request,response)=>{
 
 uppdateBook=async (request,response)=>{
     try {
+
+        if(request.user.role==='STUDENT'){
+            return response.status(403).json({message:"You are not authorized to update a book"});
+        }
+
         const book=await Book.findByIdAndUpdate(request.params.id,request.body,{new:true});
         if(!book){{
             return response.status(404).json({message:"Book not found"});
@@ -64,6 +73,11 @@ uppdateBook=async (request,response)=>{
 
 deleteBook=async (request,response)=>{
     try {
+
+        if(request.user.role==='STUDENT'){
+            return response.status(403).json({message:"You are not authorized to delete a book"});
+        }
+
         const book=await Book.findByIdAndDelete(request.params.id);
         if(!book){{
             return response.status(404).json({message:"Book not found"});
